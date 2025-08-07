@@ -22,19 +22,25 @@ find_package(rosidl_default_runtime REQUIRED)
 
 # get all msg files
 set(MSGS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/msg")
-file(GLOB FSC_AUTOPILOT_ROS2_MSGS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${MSGS_DIR}/*.msg")
+# get all msg files
+file(GLOB MSG_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/msg/*.msg")
 
+# Format each file as "<base_path>:<relative_path>"
+set(FSC_AUTOPILOT_ROS2_MSGS "")
+foreach(msg_file ${MSG_FILES})
+  file(RELATIVE_PATH rel_path "${CMAKE_CURRENT_SOURCE_DIR}" "${msg_file}")
+  list(APPEND FSC_AUTOPILOT_ROS2_MSGS "${CMAKE_CURRENT_SOURCE_DIR}:${rel_path}")
+endforeach()
 
-# Generate introspection typesupport for C and C++ and IDL files
 rosidl_generate_interfaces(${PROJECT_NAME}
-	${FSC_AUTOPILOT_ROS2_MSGS}
-	DEPENDENCIES builtin_interfaces geometry_msgs nav_msgs std_msgs
-	ADD_LINTER_TESTS
+  ${FSC_AUTOPILOT_ROS2_MSGS}
+  DEPENDENCIES builtin_interfaces geometry_msgs nav_msgs std_msgs
+  ADD_LINTER_TESTS
 )
 
-rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME}
-                              rosidl_typesupport_cpp)
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} rosidl_typesupport_cpp)
 
 ament_export_dependencies(rosidl_default_runtime)
+ament_export_include_directories(include)
 
 ament_package()
