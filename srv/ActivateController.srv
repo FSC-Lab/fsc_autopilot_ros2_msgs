@@ -1,0 +1,19 @@
+# Switch the answering node into one of the modes it reported via ListControllers.
+#
+# This is a CONTROL-LAW switch only. It must never arm/disarm a vehicle or change the
+# PX4 flight mode -- those stay with the RC/ELRS transmitter on real hardware.
+#
+# Requesting the already-active mode succeeds and is a no-op, so a caller retrying
+# after a lost response cannot bounce the controller.
+
+# Must match a ControllerInfo.name from ListControllers. Unknown names are rejected
+# rather than silently mapped to a default.
+string name
+---
+bool success
+string message
+
+# The mode actually active after handling the request. On failure this is the mode
+# still running, so a caller always learns the true state -- do not assume a sent
+# request took effect; confirm from this field or the controller_type topic.
+string active

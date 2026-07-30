@@ -1,0 +1,17 @@
+# Ask a running autopilot node which control modes IT implements.
+#
+# Scope: modes of the node answering the call -- NOT every controller variant in the
+# workspace. Baseline, CCM, CCM-outer and direct-actuation are separate executables
+# (one process per stack, chosen by the launcher), so a node can only report and
+# activate what it can switch into internally. A node that has a single fixed mode
+# answers with one entry; that is a valid answer, not an error.
+---
+bool success
+string message
+
+# Every mode this node implements, including the active one.
+ControllerInfo[] controllers
+
+# Name of the active mode, mirroring the entry with active=true. Empty if the node
+# somehow has no active mode.
+string active

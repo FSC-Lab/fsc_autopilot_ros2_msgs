@@ -24,10 +24,13 @@ find_package(rosidl_default_runtime REQUIRED)
 set(MSGS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/msg")
 # get all msg files
 file(GLOB MSG_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/msg/*.msg")
+# ...and all srv files. Controller discovery/activation lives in srv/; without this
+# glob those services generate no code and the nodes fail to compile.
+file(GLOB SRV_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/srv/*.srv")
 
 # Format each file as "<base_path>:<relative_path>"
 set(FSC_AUTOPILOT_ROS2_MSGS "")
-foreach(msg_file ${MSG_FILES})
+foreach(msg_file ${MSG_FILES} ${SRV_FILES})
   file(RELATIVE_PATH rel_path "${CMAKE_CURRENT_SOURCE_DIR}" "${msg_file}")
   list(APPEND FSC_AUTOPILOT_ROS2_MSGS "${CMAKE_CURRENT_SOURCE_DIR}:${rel_path}")
 endforeach()
