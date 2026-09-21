@@ -40,7 +40,9 @@ geometry_msgs/Vector3 b1_de
 geometry_msgs/Vector3 b1_de_dot
 geometry_msgs/Vector3 b1_de_ddot
 
-# Joint reference [rad, rad/s] for the optional posture objective (selects the
-# IK branch); consistent with the Cartesian reference above by construction.
+# Joint reference [rad, rad/s] for the posture objective (selects the IK
+# branch); consistent with the Cartesian reference above by construction.
+# NOT optional in practice -- deleting that objective was tried 2026-09-05 and
+# DIRECT became unreliable. See Command.md 7.14.6.
 float64[4] q_d
 float64[4] qdot_d
