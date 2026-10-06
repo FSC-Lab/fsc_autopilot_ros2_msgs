@@ -31,6 +31,8 @@ If the messages are built correctly, you should able to see the following:
 ```
 <your_ubuntu_name>@your_device_name:~/source/fsc_autopilot2_ws$ ros2 interface list | grep fsc_autopilot_ros2_msgs
     fsc_autopilot_ros2_msgs/msg/AttitudeControllerState
+    fsc_autopilot_ros2_msgs/msg/CcmControllerInput
+    fsc_autopilot_ros2_msgs/msg/Mocap
     fsc_autopilot_ros2_msgs/msg/PositionControllerReference
     fsc_autopilot_ros2_msgs/msg/PositionControllerState
     fsc_autopilot_ros2_msgs/msg/UDEState
