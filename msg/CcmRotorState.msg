@@ -1,6 +1,6 @@
 # State x of the ROTOR-THRUST (R)CCM pipeline: rigid body + the four actual rotor thrusts.
 #
-#   fsc_autopilot_ros2 (single_drone_ccm_rotor_actuation)  publishes, ~250 Hz
+#   fsc_autopilot_ros2 (single_drone_ccm_rotor_actuation)  publishes, ~200 Hz
 #   torch_model_loader (CCM_rotor_direct)                   evaluates the controller on it
 #
 # World frame ENU, body frame FLU, SI units. Rotor index i = PX4 motor i (CA_ROTOR<i-1>).
